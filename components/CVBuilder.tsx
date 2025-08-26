@@ -3,89 +3,17 @@
 import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { ArrowLeft, ArrowRight, Download, Edit3 } from "lucide-react";
-import WelcomeStep from "./wizard-steps/WelcomeStep";
-import TemplateStep from "./wizard-steps/TemplateStep";
-import PersonalStep from "./wizard-steps/PersonalStep";
-import ExperienceStep from "./wizard-steps/ExperienceStep";
-import EducationStep from "./wizard-steps/EducationStep";
-import SkillsStep from "./wizard-steps/SkillsStep";
-import PreviewStep from "./wizard-steps/PreviewStep";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import WelcomeStep from "./steps/WelcomeStep";
+import TemplateStep from "./steps/TemplateStep";
+import PersonalStep from "./steps/PersonalStep";
+import ExperienceStep from "./steps/ExperienceStep";
+import EducationStep from "./steps/EducationStep";
+import SkillsStep from "./steps/SkillsStep";
+import PreviewStep from "./steps/PreviewStep";
 import type { ResumeData } from "@/models/ResumeData";
-
-const initialData: ResumeData = {
-  firstName: "Alex",
-  lastName: "Johnson",
-  title: "Senior Software Engineer",
-  email: "alex.johnson@email.com",
-  phone: "+1 (555) 123-4567",
-  website: "alexjohnson.dev",
-  summary:
-    "Experienced software engineer with 5+ years of expertise in full-stack development, specializing in React, Node.js, and cloud technologies. Passionate about building scalable applications and leading development teams to deliver high-quality software solutions.",
-  experiences: [
-    {
-      id: 1,
-      role: "Senior Software Engineer",
-      company: "TechCorp Solutions",
-      start: "2022",
-      end: "Present",
-      description:
-        "• Led development of microservices architecture serving 1M+ users daily\n• Mentored junior developers and established coding standards for the team\n• Improved application performance by 45% through optimization and caching strategies\n• Collaborated with product managers to define technical requirements and roadmaps",
-    },
-    {
-      id: 2,
-      role: "Full Stack Developer",
-      company: "StartupXYZ",
-      start: "2020",
-      end: "2022",
-      description:
-        "• Built responsive web applications using React, TypeScript, and Node.js\n• Implemented CI/CD pipelines reducing deployment time by 60%\n• Designed and developed RESTful APIs handling 10K+ requests per minute\n• Worked closely with UX designers to create intuitive user interfaces",
-    },
-    {
-      id: 3,
-      role: "Junior Developer",
-      company: "Digital Agency Inc",
-      start: "2019",
-      end: "2020",
-      description:
-        "• Developed client websites using modern web technologies\n• Participated in code reviews and agile development processes\n• Maintained and updated existing applications with new features\n• Collaborated with designers to implement pixel-perfect UI components",
-    },
-  ],
-  education: [
-    {
-      id: 1,
-      school: "University of Technology",
-      degree: "Bachelor of Science in Computer Science",
-      start: "2015",
-      end: "2019",
-    },
-    {
-      id: 2,
-      school: "Tech Bootcamp Academy",
-      degree: "Full Stack Web Development Certificate",
-      start: "2019",
-      end: "2019",
-    },
-  ],
-  skills: [
-    "JavaScript",
-    "TypeScript",
-    "React",
-    "Node.js",
-    "Python",
-    "AWS",
-    "Docker",
-    "MongoDB",
-    "PostgreSQL",
-    "Git",
-    "CI/CD",
-    "Agile",
-    "Team Leadership",
-    "Problem Solving",
-    "Communication",
-  ],
-  template: "classic",
-};
+import { initialData } from "@/data/initial-data";
+import Image from "next/image";
 
 const steps = [
   { id: "welcome", title: "Welcome", component: WelcomeStep },
@@ -97,7 +25,7 @@ const steps = [
   { id: "preview", title: "Preview", component: PreviewStep },
 ];
 
-export default function ResumeWizard() {
+export default function CVBuilder() {
   const [currentStep, setCurrentStep] = useState(0);
   const [data, setData] = useState<ResumeData>(initialData);
   const [isEditing, setIsEditing] = useState(false);
@@ -139,6 +67,28 @@ export default function ResumeWizard() {
 
   return (
     <div>
+      {/* NAVBAR */}
+      <nav className="sticky top-0 z-20 bg-background w-full px-4 md:px-6 py-4 border-b">
+        <div className="-z-10 absolute inset-0 bg-gradient-to-b from-primary to-secondary opacity-20 blur-3xl" />
+        <div className="md:container md:mx-auto flex items-center justify-between">
+          <div
+            onClick={() => setCurrentStep(0)}
+            className="flex items-center gap-3 cursor-pointer"
+          >
+            <Image
+              src="/cv.png"
+              alt="Logo"
+              width={40}
+              height={40}
+              className="rounded"
+            />
+            <span className="text-lg md:text-xl font-bold">CV Builder</span>
+          </div>
+
+          <Button onClick={() => setCurrentStep(0)}>Get Started</Button>
+        </div>
+      </nav>
+
       {/* HEADER */}
       {!isWelcomeStep && (
         <div className="top-0 z-50">
