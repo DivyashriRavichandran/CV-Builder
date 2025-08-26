@@ -1,5 +1,5 @@
 ## CV Builder – :rocket: [Live Website](https://cv-builder-online.vercel.app/)
-CV Builder is a web app that lets users create and customize professional CVs effortlessly using a variety of pre-designed templates and download it as a pdf.
+CV Builder is a web app to create and customize professional CVs effortlessly using a variety of pre-designed templates and download it as a pdf.
 
 ## Run Locally
 1. Clone the project and navigate to the project directory.
